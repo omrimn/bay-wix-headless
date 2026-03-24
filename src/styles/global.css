@@ -49,6 +49,10 @@ h2{
   --s: 16px; /* control the size */
   --c1:#396379;
   --c2:#2a4959;
+  @variant dark{
+  --c1:#B66D57;
+  --c2:#945947;
+  }
   
   --g:radial-gradient(30% 50% at 30% 100%,#0000 66%,var(--c1) 67% 98%,#0000);
   background:
