@@ -1,0 +1,45 @@
+---
+import type { Product } from "../../lib/wix/types";
+import AddToCart from "../cart/add-to-cart.astro";
+import Price from "../price.astro";
+import Prose from "../prose.astro";
+import VariantSelector from "./variant-selector.astro";
+
+type Props = {
+  product: Product;
+};
+---
+
+<div class="mb-6 flex flex-col border-b pb-6 dark:border-neutral-700">
+  <h1 class="mb-2 text-[1.8rem] font-medium">{Astro.props.product.title}</h1>
+  <div class="mr-auto w-auto rounded-full bg-bay-accent p-2 mt-5 text-sm text-white">
+    <Price
+      amount={Astro.props.product.priceRange.maxVariantPrice.amount}
+      currencyCode={Astro.props.product.priceRange.maxVariantPrice.currencyCode}
+    />
+  </div>
+</div>
+<VariantSelector
+  options={Astro.props.product.options}
+  variants={Astro.props.product.variants}
+/>
+{
+  Astro.props.product.descriptionHtml ? (
+    <Prose
+      class="mb-6 text-sm leading-tight dark:text-white/60"
+      html={Astro.props.product.descriptionHtml}
+    />
+  ) : null
+}
+
+<AddToCart
+  productId={Astro.props.product.id}
+  variants={Astro.props.product.variants}
+  availableForSale={Astro.props.product.availableForSale}
+/>
+
+<div class="mt-6 text-xs italic">
+  <p>Merci de bien prêter attention aux dimensions indiquées sur chaque fiche produit avant vos achats, aucun retour ne sera accepté en cas d’erreur de taille.</p>
+  <p>Attention, les couleurs des photos peuvent légèrement varier selon les écrans; une petite différence est donc possible à la réception du bijou.</p>
+  <div class="my-6"><a href="../conseils-d-entretien" class="mr-auto w-auto rounded-full bg-bay-accent-light p-2 mt-5 text-sm text-white hover:opacity-90">Nos conseils d'entretien</a></div>
+</div>

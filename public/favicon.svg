@@ -1,0 +1,44 @@
+<svg
+   xmlns="http://www.w3.org/2000/svg"
+   viewBox="0 0 896 834.66669"
+   xml:space="preserve"
+   id="svg2"
+   version="1.1"><defs
+     id="defs6"><clipPath
+       id="clipPath18"
+       clipPathUnits="userSpaceOnUse"><path
+         id="path16"
+         d="M 0,626 H 672 V 0 H 0 Z" /></clipPath><clipPath
+       id="clipPath34"
+       clipPathUnits="userSpaceOnUse"><path
+         id="path32"
+         d="M 0,626 H 672 V 0 H 0 Z" /></clipPath></defs><g
+     transform="matrix(1.3333333,0,0,-1.3333333,0,834.66667)"
+     id="g10"><g
+       id="g12"><g
+         clip-path="url(#clipPath18)"
+         id="g14"><text
+           id="text22"
+           style="font-variant:normal;font-weight:300;font-stretch:normal;font-size:302px;font-family:'Nexa Rust Script L0';-inkscape-font-specification:NexaRustScriptL-0;writing-mode:lr-tb;fill:#2a4959;fill-opacity:1;fill-rule:nonzero;stroke:none"
+           transform="matrix(1,0,0,-1,44.5884,378.0264)"><tspan
+             id="tspan20"
+             y="0"
+             x="0 220.46001 306.228 426.6958">Alex</tspan></text>
+</g></g><text
+       id="text26"
+       style="font-variant:normal;font-weight:300;font-stretch:normal;font-size:313.45700073px;font-family:'Nexa Rust Script L0';-inkscape-font-specification:NexaRustScriptL-0;writing-mode:lr-tb;fill:#2a4959;fill-opacity:1;fill-rule:nonzero;stroke:none"
+       transform="matrix(1,0,0,-0.96472945,53.3843,156.1211)"><tspan
+         id="tspan24"
+         y="0"
+         x="0 233.83893 357.65445 449.81079">Yell</tspan></text>
+<g
+       id="g28"><g
+         clip-path="url(#clipPath34)"
+         id="g30"><text
+           id="text38"
+           style="font-variant:normal;font-weight:900;font-stretch:normal;font-size:108.23345947px;font-family:'Nexa Rust Sans Black';-inkscape-font-specification:NexaRustSans-Black;writing-mode:lr-tb;fill:#9babb3;fill-opacity:1;fill-rule:nonzero;stroke:none"
+           transform="matrix(0.78399049,0.00348136,-0.44595176,-0.99999394,203.1823,70.0988)"><tspan
+             id="tspan36"
+             y="0"
+             x="0 82.58213 119.92267 203.15419 297.642 380.32153">Bijoux</tspan></text>
+</g></g></g></svg>

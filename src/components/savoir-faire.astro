@@ -1,0 +1,14 @@
+---
+import Prose from "../components/prose.astro";
+import { getPage } from "../lib/wix";
+
+const page = await getPage("savoir-faire");
+
+if (!page) {
+  return new Response(null, { status: 404 });
+}
+---
+<section class="w-full py-20 px-4">
+    <h2 class="mb-8 text-4xl font-bold text-bay-accent dark:text-white">{page.title}</h2>
+    <Prose class="mb-8 max-w-2xl sm:mx-auto" html={page.body} />
+</section>

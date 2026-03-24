@@ -1,0 +1,52 @@
+---
+import { getMenu } from "../../lib/wix";
+import LogoSquare from "../logo-square.astro";
+import FooterMenu from "./footer-menu.astro";
+import FacebookLogo from "../icons/facebook.astro"
+import InstaLogo from "../icons/instagram.astro"
+
+const { COMPANY_NAME, SITE_NAME } = import.meta.env;
+const currentYear = new Date().getFullYear();
+const copyrightDate = 2025 + (currentYear > 2025 ? `-${currentYear}` : "");
+const menu = await getMenu("next-js-frontend-footer-menu");
+const copyrightName = COMPANY_NAME || SITE_NAME || "";
+---
+
+<footer class="text-sm text-neutral-500 dark:text-neutral-400">
+  <div
+    class="mx-auto flex w-full max-w-7xl flex-col gap-6 border-t border-neutral-200 px-6 py-12 text-sm md:flex-row md:gap-12 md:px-4 min-[1320px]:px-0 dark:border-neutral-700"
+  >
+    <div>
+      <a
+        class="flex items-center gap-2 text-black md:pt-1 dark:text-white"
+        href="/"
+      >
+        <LogoSquare size="sm" />
+        <span class="uppercase">{SITE_NAME}</span>
+      </a>
+    </div>
+    <FooterMenu menu={menu} />
+    <div class="md:ml-auto h-8 p-3 w-max rounded-md border border-neutral-200 bg-bay-accent text-lg text-white dark:border-bay-accent dark:bg-transparent h-full w-full rounded-xl font-bold">
+      <span class="p-3">Suivez nous</span>
+      <div class="flex flex-none items-center justify-center">
+        <a href="https://www.facebook.com/BijouxAlexYell" class="hover:scale-105 transition duration-300 ease-in-out">
+          <FacebookLogo class="h-[60px] w-[60px] rounded-xl" />
+        </a>
+        <a href="https://www.instagram.com/bijouxalexyell/" class="hover:scale-105 transition duration-300 ease-in-out">
+          <InstaLogo class="h-[60px] w-[60px] rounded-xl" />
+        </a>
+    </div>
+    </div>
+  </div>
+  <div class="border-t border-neutral-200 py-6 text-sm dark:border-neutral-700">
+    <div
+      class="mx-auto flex w-full max-w-7xl flex-col items-center gap-1 px-4 md:flex-row md:gap-0 md:px-4 min-[1320px]:px-0"
+    >
+      <p>
+        &copy; {copyrightDate}
+        {copyrightName}
+        {copyrightName.length && !copyrightName.endsWith(".") ? "." : ""} Tout droit réservé
+      </p>
+    </div>
+  </div>
+</footer>
