@@ -58,7 +58,7 @@ type Props = { menu: Menu[] };
             <ul class="flex w-full flex-col">
               {Astro.props.menu.map((item: Menu) => (
                 <li class="py-2 text-xl text-black transition-colors hover:text-neutral-500 dark:text-white">
-                  <a href={item.path} data-astro-prefetch class={item.ordre > 1000 ? "text-bay-accent font-sans font-light" : ""}>
+                  <a href={item.path} class={item.ordre > 1000 ? "text-bay-accent font-sans font-light" : ""}>
                     {item.title}
                   </a>
                 </li>

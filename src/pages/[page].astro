@@ -19,20 +19,20 @@ if (!page) {
 <Layout>
   <div class="w-full">
     <div class="mx-8 max-w-2xl py-20 sm:mx-auto">
-      <h1 class="mb-8 text-5xl font-bold text-bay-accent">{page.title}</h1>
+      <h1 class="mb-8 text-5xl font-bold text-bay-accent dark:text-bay-accent-dark">{page.title}</h1>
       <Prose class="mb-8" html={page.body} />
-      {page.reseauxSociaux ? <Social /> : null}
-      {page.title2 ? <Prose class="mb-8" html={page.title2} /> : null}
-      {page.image ? <div class="size-full">
+      {page.reseauxSociaux && <Social />}
+      {page.title2 && <Prose class="mb-8" html={page.title2} />}
+      {page.image && (<div class="size-full">
                         <Image
                              class="size-full object-cover group-hover:scale-105"
                              inferSize={true}
                              src={wixImageToHttpUrl(page.image)}
                              alt="La deventure de notre boutique à Crouy"
-                         /></div> : null}
-      {page.body2 ? <Prose html={page.body2} /> : null}
-      {page.map ? <Map /> : null}
-      {page.time ? <Prose class="mb-8" html={page.time} /> : null}
+                         /></div>)}
+      {page.body2 && <Prose html={page.body2} /> }
+      {page.map && <Map />}
+      {page.time && <Prose class="mb-8" html={page.time} />}
   </div>
   <Footer />
 </Layout>

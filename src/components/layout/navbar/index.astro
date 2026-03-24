@@ -10,7 +10,7 @@ const menu = await getMenu("next-js-frontend-header-menu");
 const { SITE_NAME } = import.meta.env;
 ---
 
-<div class="fixed top-0 left-0 right-0 z-50 bg-white font-charm font-bold dark:bg-neutral-900 dark:text-white dark:selection:bg-pink-500 dark:selection:text-white">
+<div class="fixed top-0 left-0 right-0 z-50 bg-white font-charm font-bold dark:bg-neutral-900 dark:text-white dark:selection:bg-pink-500 dark:selection:text-white shadow-sm">
 <nav class="relative flex items-center justify-between p-4 lg:px-6">
   <div class="block flex-none md:hidden">
     <MobileMenu menu={menu} />
@@ -36,7 +36,7 @@ const { SITE_NAME } = import.meta.env;
               <li>
                 <a
                   href={item.path}
-                  data-astro-prefetch
+                  // data-astro-prefetch
                   class="text-neutral-500 underline-offset-4 hover:text-black hover:underline dark:text-neutral-400 dark:hover:text-neutral-300"
                 >
                   {item.title}

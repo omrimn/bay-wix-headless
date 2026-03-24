@@ -6,9 +6,13 @@ import { Image } from "astro:assets";
 const images = await getHomeImages()
 images.sort(() => Math.random() - 0.5);
 
+if(!images?.length) {
+  console.log('error images')
+  return null
+  }
 ---
 
-<div class="p-8">
+{images && (<div class="p-8">
     <h2 class="mb-2 ml-4 text-4xl font-bold text-bay-accent dark:text-white">Galerie Photo</h2>
     <div class="mx-auto container my-8 sm:columns-2 md:columns-3 lg:columns-4 xl:columns-5">
       {
@@ -22,4 +26,4 @@ images.sort(() => Math.random() - 0.5);
         ))
       }
     </div>
-</div>
+</div>)}

@@ -7,9 +7,11 @@ import {sortingMenu} from "../lib/utils";
 
 const menu = await getMenu("categories_accueil");
 const sortMenu= sortingMenu(menu);
+
+if(!menu?.length) {console.log('error categories'); return null}
 ---
 
-<section class="mt-6 py-15 px-4">
+{ menu && (<section class="mt-6 py-15 px-4">
     <h2 class="mb-2 ml-4 text-4xl font-bold text-bay-accent dark:text-white">Catégories</h2>
     <div class="w-full">
     <div class="w-full">
@@ -20,7 +22,7 @@ const sortMenu= sortingMenu(menu);
               <li class="size-full">
                 <a
                   href={item.path}
-                  data-astro-prefetch
+                  // data-astro-prefetch
                   class="group text-white underline-offset-4 text-xl font-bold transition duration-300 ease-in-out"
                 >
                     <div class="relative rounded-md overflow-hidden size-full">
@@ -44,4 +46,4 @@ const sortMenu= sortingMenu(menu);
       }
     </div>
 </div>
-</section>
+</section>)}
