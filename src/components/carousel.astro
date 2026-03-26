@@ -3,9 +3,14 @@ import { getCollectionProducts } from "../lib/wix";
 import GridTileImage from "./grid/tile.astro";
 
 // Collections that start with `hidden-*` are hidden from the search page.
-const products = await getCollectionProducts({
-  collection: "hidden-homepage-carousel",
-});
+let products: any[] = [];
+try {
+  products = await getCollectionProducts({
+    collection: "hidden-homepage-carousel",
+  });
+} catch (err) {
+  console.error("ERROR fetching carousel collection:", err);
+}
 
 if (!products?.length) return null;
 

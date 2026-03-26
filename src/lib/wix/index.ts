@@ -279,21 +279,31 @@ export async function getCollectionProducts({
       await collections.getCollectionBySlug(collection);
     resolvedCollection = wixCollection;
   } catch (e) {
+    console.error(`Error fetching collection "${collection}":`, e);
     if ((e as any)?.details?.applicationError?.code !== 404) {
       throw e;
     }
   }
 
   if (!resolvedCollection) {
-    console.log(`No collection found for \`${collection}\``);
+    console.warn(`No collection found for "${collection}" - check that this collection exists and is published in Wix`);
     return [];
   }
 
-  const { items } = await (await sortedProductsQuery(sortKey, reverse))
-    .hasSome("collectionIds", [resolvedCollection._id])
-    .find();
+  try {
+    const { items } = await (await sortedProductsQuery(sortKey, reverse))
+      .hasSome("collectionIds", [resolvedCollection._id])
+      .find();
 
-  return items.map(reshapeProduct);
+    if (!items || items.length === 0) {
+      console.warn(`Collection "${collection}" found but contains no products`);
+    }
+
+    return items.map(reshapeProduct);
+  } catch (error) {
+    console.error(`Error fetching products for collection "${collection}":`, error);
+    return [];
+  }
 }
 
 async function sortedProductsQuery(sortKey?: string, reverse?: boolean) {
@@ -331,79 +341,94 @@ export async function getCollections(): Promise<Collection[]> {
 }
 
 export async function getMenu(handle: string): Promise<Menu[]> {
-  const { items: menus } = await items
-    .queryDataItems({
-      dataCollectionId: "Menus",
-      includeReferencedItems: ["pages"],
-    })
-    .eq("slug", handle)
-    .find()
-    .catch((e) => {
-      if (e.details.applicationError.code === "WDE0025") {
-        console.error(
-          "Menus collection was not found. Did you forget to create the Menus data collection?"
-        );
-        return { items: [] };
-      } else {
-        throw e;
-      }
-    });
+  try {
+    const { items: menus } = await items
+      .queryDataItems({
+        dataCollectionId: "Menus",
+        includeReferencedItems: ["pages"],
+      })
+      .eq("slug", handle)
+      .find()
+      .catch((e) => {
+        if (e.details?.applicationError?.code === "WDE0025") {
+          console.error(
+            "Menus collection was not found. Did you forget to create the Menus data collection?"
+          );
+          return { items: [] };
+        } else {
+          throw e;
+        }
+      });
 
-  const menu = menus[0];
+    const menu = menus[0];
 
-  return (
-    menu?.data!.pages.map((page: { title: string; slug: string; image: string; ordre: number }) => ({
-      title: page.title,
-      path: "/" + page.slug,
-      image: page.image,
-      ordre: page.ordre,
-    })) || []
-  );
+    if (!menu) {
+      console.warn(`Menu with slug "${handle}" not found in Menus collection`);
+    }
+
+    return (
+      menu?.data!.pages.map((page: { title: string; slug: string; image: string; ordre: number }) => ({
+        title: page.title,
+        path: "/" + page.slug,
+        image: page.image,
+        ordre: page.ordre,
+      })) || []
+    );
+  } catch (error) {
+    console.error(`Error fetching menu "${handle}":`, error);
+    return [];
+  }
 }
 
 export async function getPage(handle: string): Promise<Page | undefined> {
-  const { items: pages } = await items
-    .queryDataItems({
-      dataCollectionId: "Pages",
-    })
-    .eq("slug", handle)
-    .find()
-    .catch((e) => {
-      if (e.details.applicationError.code === "WDE0025") {
-        console.error(
-          "Pages collection was not found. Did you forget to create the Pages data collection?"
-        );
-        return { items: [] };
-      } else {
-        throw e;
-      }
-    });
+  try {
+    const { items: pages } = await items
+      .queryDataItems({
+        dataCollectionId: "Pages",
+      })
+      .eq("slug", handle)
+      .find()
+      .catch((e) => {
+        if (e.details?.applicationError?.code === "WDE0025") {
+          console.error(
+            "Pages collection was not found. Did you forget to create the Pages data collection?"
+          );
+          return { items: [] };
+        } else {
+          throw e;
+        }
+      });
 
-  const page = pages[0];
+    const page = pages[0];
 
-  if (!page) {
-    return undefined;
-  }
+    if (!page) {
+      console.warn(`Page with slug "${handle}" not found in Pages collection`);
+      return undefined;
+    }
 
-  return {
-    id: page._id!,
-    title: page.data!.title,
-    handle: "/" + page.data!.slug,
-    body: page.data!.body,
-    bodySummary: "",
-    createdAt: page.data!._createdDate.$date,
-    seo: {
-      title: page.data!.seoTitle,
-      description: page.data!.seoDescription,
-    },
-    image: page.data!.image,
-    updatedAt: page.data!._updatedDate.$date,
+    return {
+      id: page._id!,
+      title: page.data!.title,
+      handle: "/" + page.data!.slug,
+      body: page.data!.body,
+      bodySummary: "",
+      createdAt: page.data!._createdDate.$date,
+      seo: {
+        title: page.data!.seoTitle,
+        description: page.data!.seoDescription,
+      },
+      image: page.data!.image,
+      updatedAt: page.data!._updatedDate.$date,
     reseauxSociaux: page.data!.reseauxSociaux,
     title2: page.data!.title2,
     body2: page.data!.body2,
     map: page.data!.map,
     time: page.data!.time,    
   };
+  } catch (error) {
+    console.error(`Error fetching page "${handle}":`, error);
+    return undefined;
+  }
 }
 
 export async function getPages(): Promise<Page[]> {
@@ -536,31 +561,39 @@ export async function createCheckoutUrl(postFlowUrl: string) {
 
 
 export async function getHomeImages(): Promise<Image[]>{
-const { items: image } = await items
-    .queryDataItems({
-      dataCollectionId: "images_accueil",
-    })
-    .find()
-    .catch((e) => {
-      if (e.details.applicationError.code === "WDE0025") {
-        console.error(
-          "Home Images collection was not found. Did you forget to create the Home Image data collection?"
-        );
-        return { items: [] };
-      } else {
-        throw e;
-      }
-    });
+  try {
+    const { items: image } = await items
+      .queryDataItems({
+        dataCollectionId: "images_accueil",
+      })
+      .find()
+      .catch((e) => {
+        if (e.details?.applicationError?.code === "WDE0025") {
+          console.error(
+            "Home Images collection was not found. Did you forget to create the 'images_accueil' data collection?"
+          );
+          return { items: [] };
+        } else {
+          throw e;
+        }
+      });
 
-  const images = image[0];
+    const images = image[0];
 
-  // console.log(images?.data.gallerieDimages[0])
+    if (!images) {
+      console.warn('No home images record found in "images_accueil" collection');
+      return [];
+    }
 
-  return (
-    images?.data!.gallerieDimages.map((image: { src: string,  alt: string, description: string }) => ({
-      url: image.src,
-      altText: image.alt,
-      description: image.description,
-    })) || []
-  );
+    const result = images?.data!.gallerieDimages.map((img: { src: string,  alt: string, description: string }) => ({
+      url: img.src,
+      altText: img.alt,
+      description: img.description,
+    })) || [];
+
+    return result;
+  } catch (error) {
+    console.error('Error fetching home images:', error);
+    return [];
+  }
 }

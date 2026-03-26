@@ -1,17 +1,24 @@
 ---
 import Prose from "../components/prose.astro";
 import { getPage } from "../lib/wix";
-import type { Page } from '../lib/wix/types';
+import type { Page } from "../lib/wix/types";
 
 let page: Page | undefined;
 
 try {
-  page = await getPage('savoir-faire');
+  page = await getPage("savoir-faire");
 } catch (err) {
-  console.error('Failed to load the savoir-faire section.', err);
+  console.error("Failed to load the savoir-faire section.", err);
 }
 ---
-{ page && (<section class="w-full py-20 px-4">
-    <h2 class="mb-8 text-4xl font-bold text-bay-accent dark:text-white">{page.title}</h2>
-    <Prose class="mb-8 max-w-2xl sm:mx-auto" html={page.body} />
-</section>)}
+
+{
+  page && (
+    <section class="w-full py-20 px-4">
+      <h2 class="mb-8 text-4xl font-bold text-bay-accent dark:text-white">
+        {page.title}
+      </h2>
+      <Prose class="mb-8 max-w-2xl sm:mx-auto" html={page.body} />
+    </section>
+  )
+}

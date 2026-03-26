@@ -1,49 +1,64 @@
 ---
 import { getMenu } from "../lib/wix";
 import type { Menu } from "../lib/wix/types";
-import {wixImageToHttpUrl} from "../lib/utils.ts";
+import { getImageUrl } from "../lib/utils.ts";
 import { Image } from "astro:assets";
-import {sortingMenu} from "../lib/utils";
+import { sortingMenu } from "../lib/utils";
 
-const menu = await getMenu("categories_accueil");
-const sortMenu= sortingMenu(menu);
+let menu: any[] = [];
+try {
+  menu = await getMenu("categoriesAccueil");
+  console.log(
+    "Categories menu fetch result:",
+    menu?.length || 0,
+    "items found",
+  );
+} catch (err) {
+  console.error("ERROR fetching categories menu:", err);
+}
 
-if(!menu?.length) {console.log('error categories'); return null}
+const sortMenu = sortingMenu(menu || []);
 ---
 
-{ menu && (<section class="mt-6 py-15 px-4">
-    <h2 class="mb-2 ml-4 text-4xl font-bold text-bay-accent dark:text-white">Catégories</h2>
-    <div class="w-full">
-    <div class="w-full">
-      {
-        sortMenu.length ? (
-          <ul class="gap-6 text-sm grid grid-flow-col grid-rows-2 md:grid-rows-1 md:items-center">
-            {sortMenu.map((item: Menu) => (
-              <li class="size-full">
-                <a
-                  href={item.path}
-                  data-astro-prefetch
-                  class="group text-white underline-offset-4 text-xl font-bold transition duration-300 ease-in-out"
-                >
+{
+  menu && (
+    <section class="mt-6 py-15 px-4">
+      <h2 class="mb-2 ml-4 text-4xl font-bold text-bay-accent dark:text-white">
+        Catégories
+      </h2>
+      <div class="w-full">
+        <div class="w-full">
+          {sortMenu.length ? (
+            <ul class="gap-6 text-sm grid grid-flow-col grid-rows-2 md:grid-rows-1 md:items-center">
+              {sortMenu.map((item: Menu) => (
+                <li class="size-full">
+                  <a
+                    href={item.path}
+                    data-astro-prefetch
+                    class="group text-white underline-offset-4 text-xl font-bold transition duration-300 ease-in-out"
+                  >
                     <div class="relative rounded-md overflow-hidden size-full">
-                        <div class="size-full">
-                        <Image
-                             class="size-full object-cover group-hover:scale-105"
-                             inferSize={true}
-                             src={wixImageToHttpUrl(item.image)}
-                             alt={`Vers la catégorie: ${item.title}`}
-                         /></div>
-                        <div class="absolute inset-0 bg-gray-700 opacity-40"></div>
-                        <div class="absolute inset-0 flex items-center justify-center">
-                            <div class="text-center">{item.title}</div>
-                        </div>
+                      <div class="size-full">
+                        {/* <Image
+                          class="size-full object-cover group-hover:scale-105"
+                          inferSize={true}
+                          src={getImageUrl(item.image)}
+                          alt={`Vers la catégorie: ${item.title}`}
+                        /> */}
+                        <div class="h-[50px] w-full bg-gray-300" />
+                      </div>
+                      <div class="absolute inset-0 bg-gray-700 opacity-40" />
+                      <div class="absolute inset-0 flex items-center justify-center">
+                        <div class="text-center">{item.title}</div>
+                      </div>
                     </div>
-                </a>
-              </li>
-            ))}
-          </ul>
-        ) : null
-      }
-    </div>
-</div>
-</section>)}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          ) : null}
+        </div>
+      </div>
+    </section>
+  )
+}

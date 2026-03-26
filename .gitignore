@@ -26,3 +26,6 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+
+# vs code ai
+TROUBLESHOOTING_EMPTY_HOME_PAGE.md

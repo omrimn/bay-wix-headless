@@ -13,7 +13,7 @@ export default defineConfig({
   integrations: [wix(), react()],
 
   image: {
-    domains: ["static.wixstatic.com"],
+    domains: ["static.wixstatic.com", "www.wixstatic.com"],
   },
 
   vite: {
