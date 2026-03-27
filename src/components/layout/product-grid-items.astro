@@ -14,14 +14,15 @@ type Props = { products: Product[] };
         href={`/product/${product.handle}`}
       >
         <GridTileImage
-          alt={product.title}
+          alt={product.title ?? "Product"}
           inferSize
           label={{
-            title: product.title,
-            amount: product.priceRange.maxVariantPrice.amount,
-            currencyCode: product.priceRange.maxVariantPrice.currencyCode,
+            title: product.title ?? "Produit",
+            amount: product.priceRange?.maxVariantPrice?.amount ?? "0",
+            currencyCode:
+              product.priceRange?.maxVariantPrice?.currencyCode ?? "EUR",
           }}
-          src={product.featuredImage?.url}
+          src={product.featuredImage?.url ?? ""}
           sizes="(min-width: 768px) 33vw, (min-width: 640px) 50vw, 100vw"
         />
       </a>

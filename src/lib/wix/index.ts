@@ -119,12 +119,12 @@ const reshapeProduct = (item: products.Product) => {
         })) || [],
     priceRange: {
       minVariantPrice: {
-        amount: String(item.priceData?.price),
-        currencyCode: item.priceData?.currency!,
+        amount: String(item.priceData?.price ?? 0),
+        currencyCode: item.priceData?.currency ?? "EUR",
       },
       maxVariantPrice: {
-        amount: String(item.priceData?.price!),
-        currencyCode: item.priceData?.currency!,
+        amount: String(item.priceData?.price ?? 0),
+        currencyCode: item.priceData?.currency ?? "EUR",
       },
     },
     options: (item.productOptions ?? []).map((option) => ({
@@ -280,7 +280,13 @@ export async function getCollectionProducts({
     resolvedCollection = wixCollection;
   } catch (e) {
     console.error(`Error fetching collection "${collection}":`, e);
-    if ((e as any)?.details?.applicationError?.code !== 404) {
+    const isNotFound =
+      (e as any)?.details?.applicationError?.code === 404 ||
+      (e as any)?.code === 404 ||
+      (e as any)?.code === "404" ||
+      (e as any)?.statusCode === 404;
+
+    if (!isNotFound) {
       throw e;
     }
   }

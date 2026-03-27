@@ -32,10 +32,10 @@ if (!images?.length) {
       </h2>
       <div class="mx-auto container my-8 sm:columns-2 md:columns-3 lg:columns-4 xl:columns-5">
         {images.map((image) => (
-          <Image
+          <img
             src={getImageUrl(image.url)}
             alt={image.altText}
-            inferSize={true}
+            loading="lazy"
             class:list={[
               "mb-4 rounded-lg transition-all",
               "group-hover:shadow-lg group-hover:opacity-90",
