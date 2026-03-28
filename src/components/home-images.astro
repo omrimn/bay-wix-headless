@@ -6,7 +6,6 @@ import { Image } from "astro:assets";
 let images: Awaited<ReturnType<typeof getHomeImages>> = [];
 try {
   images = await getHomeImages();
-  console.log("Home images result:", images?.length || 0, "images found");
 } catch (err) {
   console.error("ERROR fetching home images:", err);
   images = [];

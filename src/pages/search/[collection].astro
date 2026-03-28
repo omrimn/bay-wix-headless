@@ -1,6 +1,7 @@
 ---
 import Grid from "../../components/grid/index.astro";
 import Layout from "../../components/layout/layout.astro";
+import Pagination from "../../components/pagination.astro";
 import ProductGridItems from "../../components/layout/product-grid-items.astro";
 import { defaultSort, sorting } from "../../lib/constants";
 import { getCollectionProducts } from "../../lib/wix";
@@ -8,14 +9,29 @@ import SearchLayout from "../../components/layout/search/layout.astro";
 
 const searchParams = Object.fromEntries(Astro.url.searchParams.entries());
 const params = Astro.params;
-const { sort } = searchParams;
+const { sort, page: pageParam } = searchParams;
 const { sortKey, reverse } =
   sorting.find((item) => item.slug === sort) || defaultSort;
-const products = await getCollectionProducts({
+
+const page = parseInt(pageParam) || 1;
+const limit = 30;
+const offset = (page - 1) * limit;
+
+const { products, hasNext, totalCount } = await getCollectionProducts({
   collection: params.collection!,
   sortKey,
   reverse,
+  limit,
+  offset,
 });
+
+const totalPages = totalCount ? Math.ceil(totalCount / limit) : undefined;
+
+const buildUrl = (newPage: number) => {
+  const params = new URLSearchParams(searchParams);
+  params.set("page", newPage.toString());
+  return `?${params.toString()}`;
+};
 ---
 
 <Layout>
@@ -30,6 +46,12 @@ const products = await getCollectionProducts({
           </Grid>
         )
       }
+      <Pagination
+        currentPage={page}
+        hasNext={hasNext}
+        buildUrl={buildUrl}
+        totalPages={totalPages}
+      />
     </section>
   </SearchLayout>
 </Layout>

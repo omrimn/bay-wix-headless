@@ -268,11 +268,15 @@ export async function getCollectionProducts({
   collection,
   reverse,
   sortKey,
+  limit = 40,
+  offset = 0,
 }: {
   collection: string;
   reverse?: boolean;
   sortKey?: string;
-}): Promise<Product[]> {
+  limit?: number;
+  offset?: number;
+}): Promise<{ products: Product[]; hasNext: boolean; totalCount?: number }> {
   let resolvedCollection;
   try {
     const { collection: wixCollection } =
@@ -293,22 +297,28 @@ export async function getCollectionProducts({
 
   if (!resolvedCollection) {
     console.warn(`No collection found for "${collection}" - check that this collection exists and is published in Wix`);
-    return [];
+    return { products: [], hasNext: false };
   }
 
   try {
-    const { items } = await (await sortedProductsQuery(sortKey, reverse))
+    const { items, totalCount } = await (await sortedProductsQuery(sortKey, reverse))
       .hasSome("collectionIds", [resolvedCollection._id])
+      .limit(limit)
+      .skip(offset)
       .find();
 
     if (!items || items.length === 0) {
       console.warn(`Collection "${collection}" found but contains no products`);
     }
 
-    return items.map(reshapeProduct);
+    return {
+      products: items.map(reshapeProduct),
+      hasNext: items.length === limit,
+      totalCount,
+    };
   } catch (error) {
     console.error(`Error fetching products for collection "${collection}":`, error);
-    return [];
+    return { products: [], hasNext: false };
   }
 }
 
@@ -537,17 +547,26 @@ export async function getProducts({
   query,
   reverse,
   sortKey,
+  limit = 40,
+  offset = 0,
 }: {
   query?: string;
   reverse?: boolean;
   sortKey?: string;
-}): Promise<Product[]> {
-  const { items } = await (await sortedProductsQuery(sortKey, reverse))
-    .startsWith("name", query || "")
-    .limit(100)
-    .find();
+  limit?: number;
+  offset?: number;
+}): Promise<{ products: Product[]; hasNext: boolean; totalCount?: number }> {
+  let productQuery = await sortedProductsQuery(sortKey, reverse);
+  if (query) {
+    productQuery = productQuery.startsWith("name", query);
+  }
+  const { items, totalCount } = await productQuery.limit(limit).skip(offset).find();
 
-  return items.map(reshapeProduct);
+  return {
+    products: items.map(reshapeProduct),
+    hasNext: items.length === limit,
+    totalCount,
+  };
 }
 
 export async function createCheckoutUrl(postFlowUrl: string) {

@@ -1,0 +1,53 @@
+---
+interface Props {
+  currentPage: number;
+  hasNext: boolean;
+  buildUrl: (page: number) => string;
+  totalPages?: number;
+}
+
+const { currentPage, hasNext, buildUrl, totalPages } = Astro.props;
+
+const maxVisible = 5; // Nombre max de numéros visibles
+const start = Math.max(1, currentPage - Math.floor(maxVisible / 2));
+const end = Math.min(
+  totalPages || currentPage + maxVisible - 1,
+  start + maxVisible - 1,
+);
+const pages = Array.from({ length: end - start + 1 }, (_, i) => start + i);
+---
+
+{
+  (currentPage > 1 || hasNext || totalPages) && (
+    <div class="flex justify-center items-center mt-8 space-x-2">
+      {currentPage > 1 && (
+        <a
+          href={buildUrl(currentPage - 1)}
+          class="px-3 py-2 bg-gray-200 rounded hover:bg-bay-accent-light dark:text-black"
+        >
+          Précédent
+        </a>
+      )}
+
+      {totalPages &&
+        totalPages > 1 &&
+        pages.map((page) => (
+          <a
+            href={buildUrl(page)}
+            class={`px-3 py-2 rounded ${page === currentPage ? "bg-bay-accent text-white" : "bg-gray-200 hover:bg-bay-accent-light dark:text-black"}`}
+          >
+            {page}
+          </a>
+        ))}
+
+      {hasNext && (
+        <a
+          href={buildUrl(currentPage + 1)}
+          class="px-3 py-2 bg-gray-200 rounded hover:bg-bay-accent-light dark:text-black"
+        >
+          Suivant
+        </a>
+      )}
+    </div>
+  )
+}

@@ -7,11 +7,6 @@ import { sortingMenu } from "../lib/utils";
 let menu: any[] = [];
 try {
   menu = await getMenu("categoriesAccueil");
-  console.log(
-    "Categories menu fetch result:",
-    menu?.length || 0,
-    "items found",
-  );
 } catch (err) {
   console.error("ERROR fetching categories menu:", err);
 }

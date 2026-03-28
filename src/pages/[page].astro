@@ -5,7 +5,6 @@ import Prose from "../components/prose.astro";
 import Social from "../components/social/display-socail.astro";
 import Map from "../components/social/map.astro";
 import {getImageUrl} from "../lib/utils.ts";
-import { Image } from "astro:assets";
 import { getPage } from "../lib/wix";
 
 const params = Astro.params;
@@ -24,9 +23,8 @@ if (!page) {
       {page.reseauxSociaux && <Social />}
       {page.title2 && <Prose class="mb-8" html={page.title2} />}
       {page.image && (<div class="size-full">
-                        <Image
+                        <img
                              class="size-full object-cover group-hover:scale-105"
-                             inferSize={true}
                              src={getImageUrl(page.image)}
                              alt="La deventure de notre boutique à Crouy"
                          /></div>)}

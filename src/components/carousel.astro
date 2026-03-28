@@ -5,9 +5,10 @@ import GridTileImage from "./grid/tile.astro";
 // Collections that start with `hidden-*` are hidden from the search page.
 let products: any[] = [];
 try {
-  products = await getCollectionProducts({
+  const result = await getCollectionProducts({
     collection: "hidden-homepage-carousel",
   });
+  products = result.products;
 } catch (err) {
   console.error("ERROR fetching carousel collection:", err);
 }
