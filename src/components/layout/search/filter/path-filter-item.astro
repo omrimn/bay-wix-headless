@@ -9,7 +9,7 @@ const active = Astro.url.pathname === Astro.props.item.path;
 const newParams = new URLSearchParams(Astro.url.search);
 const DynamicTag = active ? "p" : "a";
 
-newParams.delete("q");
+['q', 'page'].forEach(param => newParams.delete(param));
 ---
 
 <li class="mt-2 flex text-black dark:text-white">
