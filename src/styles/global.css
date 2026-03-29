@@ -17,8 +17,20 @@
     --color-bay-accent: #2a4959;
     --color-bay-accent-light: #8CA3AE;
     --color-bay-accent-dark: #9babb3;
+    --color-bay-selection: #e0886d;
     --font-charm: "Charm", sans serif;
-    --font-aboreto: "Aboreto", display;    
+    --font-aboreto: "Aboreto", display; 
+}
+
+@layer theme {
+  :root, :host {
+    @variant dark {
+      --color-bay-accent: #945947;
+      --color-bay-accent-light: #e0886d;
+      --color-bay-accent-dark: #b66d57;
+      --color-bay-selection: #2a4959;
+    }
+  }
 }
 
 a,
@@ -50,8 +62,8 @@ h2{
   --c1:#396379;
   --c2:#2a4959;
   @variant dark{
-  --c1:#B66D57;
-  --c2:#945947;
+  --c1:var(--color-bay-accent-light);
+  --c2:var(--color-bay-accent);
   }
   
   --g:radial-gradient(30% 50% at 30% 100%,#0000 66%,var(--c1) 67% 98%,#0000);

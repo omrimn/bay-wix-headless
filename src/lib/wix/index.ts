@@ -616,7 +616,7 @@ export async function getHomeImages(): Promise<Image[]>{
       description: img.description,
     })) || [];
 
-    return result;
+    return result.sort(() => Math.random() - 0.5).slice(0, 30);
   } catch (error) {
     console.error('Error fetching home images:', error);
     return [];
