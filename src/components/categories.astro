@@ -16,7 +16,7 @@ const sortMenu = sortingMenu(menu || []);
 
 {
   menu && (
-    <section class="mt-6 py-15 px-4">
+    <section class="deferred-section mt-6 py-15 px-4">
       <h2 class="mb-2 ml-4 text-4xl font-bold text-bay-accent dark:text-bay-accent-light">
         Catégories
       </h2>
@@ -28,7 +28,6 @@ const sortMenu = sortingMenu(menu || []);
                 <li class="size-full">
                   <a
                     href={item.path}
-                    data-astro-prefetch
                     class="group text-white underline-offset-4 text-xl font-bold transition duration-300 ease-in-out"
                   >
                     <div class="relative rounded-md overflow-hidden size-full">
@@ -39,6 +38,8 @@ const sortMenu = sortingMenu(menu || []);
                             src={getImageUrl(item.image)}
                             alt={`Vers la catégorie: ${item.title}`}
                             loading="lazy"
+                            decoding="async"
+                            fetchpriority="low"
                           />
                         ) : (
                           <div class="h-[150px] w-full bg-gray-300" />

@@ -29,9 +29,8 @@ export const validateEnvironmentVariables = () => {
   }
 };
 
-export function sortingMenu(menu: any){
-  menu.sort((a: any, b: any)=>a.ordre - b.ordre)
-  return menu;
+export function sortingMenu(menu: any) {
+  return [...menu].sort((a: any, b: any) => a.ordre - b.ordre);
 }
 
 export function getImageUrl(image: string) {
