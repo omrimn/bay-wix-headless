@@ -4,6 +4,8 @@ import type { Menu } from "../lib/wix/types";
 import { getImageUrl } from "../lib/utils.ts";
 import { sortingMenu } from "../lib/utils";
 
+export const prerender = true
+
 let menu: any[] = [];
 try {
   menu = await getMenu("categoriesAccueil");

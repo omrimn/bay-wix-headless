@@ -1,6 +1,7 @@
 ---
 import { ClientRouter } from "astro:transitions";
 import Navbar from "./navbar/index.astro";
+import Banner from "./banner.astro";
 import "../../styles/global.css";
 ---
 
@@ -15,9 +16,10 @@ import "../../styles/global.css";
     <ClientRouter />
   </head>
   <body
-    class="bg-white text-black selection:bg-bay-selection dark:bg-neutral-900 dark:text-white dark:selection:text-white relative pt-[96px]"
+    class="bg-white text-black selection:bg-bay-selection dark:bg-neutral-900 dark:text-white dark:selection:text-white relative"
   >
-    <Navbar />
+  <Banner />
+  <Navbar />
     <main>
       <slot />
     </main>

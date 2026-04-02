@@ -4,6 +4,8 @@ import LogoSquare from "../logo-square.astro";
 import FooterMenu from "./footer-menu.astro";
 import FacebookLogo from "../icons/facebook.astro"
 import InstaLogo from "../icons/instagram.astro"
+import MailLogo from "../icons/mail.astro"
+import PhoneLogo from "../icons/phone.astro"
 
 const { COMPANY_NAME, SITE_NAME } = import.meta.env;
 const currentYear = new Date().getFullYear();
@@ -27,16 +29,29 @@ const copyrightName = COMPANY_NAME || SITE_NAME || "";
       </a>
     </div>
     <FooterMenu menu={menu} />
-    <div class="md:ml-auto h-8 p-3 w-max rounded-md border border-neutral-200 bg-bay-accent text-lg text-white dark:border-bay-accent dark:bg-transparent h-full w-full rounded-xl font-bold">
-      <span class="p-3">Suivez nous</span>
-      <div class="flex flex-none items-center justify-center">
-        <a href="https://www.facebook.com/BijouxAlexYell" class="hover:scale-105 transition duration-300 ease-in-out" aria-label="Page Facebook de Bijoux Alex Yell">
-          <FacebookLogo class="h-[60px] w-[60px] rounded-xl" />
-        </a>
-        <a href="https://www.instagram.com/bijouxalexyell/" class="hover:scale-105 transition duration-300 ease-in-out" aria-label="Page Instagram de Bijoux Alex Yell">
-          <InstaLogo class="h-[60px] w-[60px] rounded-xl" />
-        </a>
-    </div>
+    <div class="md:ml-auto flex w-full flex-col items-center gap-6 md:w-auto">
+      <div class="h-8 p-3 w-max rounded-md bg-bay-accent text-lg text-white dark:bg-bay-accent h-auto w-full rounded-xl font-bold">
+        <span class="p-3">Contactez nous</span>
+        <div class="flex flex-none items-center justify-center">
+          <a href="mailto:bijoux.alex.yell@gmail.com">
+            <MailLogo class="h-[60px] w-[60px] rounded-xl" />
+          </a>
+          <a href="tel:+33744936404" class="block">
+            <PhoneLogo class="h-[60px] w-[60px] rounded-xl" />
+          </a>
+        </div>
+      </div>
+      <div class="h-8 p-3 w-max rounded-md bg-bay-accent text-lg text-white dark:bg-bay-accent h-auto w-full rounded-xl font-bold">
+        <span class="p-3">Suivez nous</span>
+        <div class="flex flex-none items-center justify-center">
+          <a href="https://www.facebook.com/BijouxAlexYell" class="hover:scale-105 transition duration-300 ease-in-out" aria-label="Page Facebook de Bijoux Alex Yell">
+            <FacebookLogo class="h-[60px] w-[60px] rounded-xl" />
+          </a>
+          <a href="https://www.instagram.com/bijouxalexyell/" class="hover:scale-105 transition duration-300 ease-in-out" aria-label="Page Instagram de Bijoux Alex Yell">
+            <InstaLogo class="h-[60px] w-[60px] rounded-xl" />
+          </a>
+        </div>
+      </div>
     </div>
   </div>
   <div class="border-t border-neutral-200 py-6 text-sm dark:border-neutral-700">

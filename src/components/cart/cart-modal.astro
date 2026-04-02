@@ -24,6 +24,9 @@ const updateItemQuantityResult = Astro.getActionResult(
 );
 
 const cart = await getCart();
+
+const fraisDeLivraison = cart && parseFloat(cart.cost.totalAmount.amount) >= 65 ? 0 : 6.9;
+const totalAmount = cart ? (parseFloat(cart.cost.totalAmount.amount) + fraisDeLivraison).toFixed(2) : 0;
 ---
 
 <button aria-label="Open cart">
@@ -158,13 +161,13 @@ const cart = await getCart();
             </div> */}
             <div class="mb-3 flex items-center justify-between border-b border-neutral-200 pb-1 pt-1 dark:border-neutral-700">
               <p>Frais de livraison</p>
-              <p class="text-right">{parseFloat(cart.cost.totalAmount.amount) >= 65 ? ("Gratuit") : ("6.90€")}</p>
+              <p class="text-right">{fraisDeLivraison === 0 ? ("Gratuit") : ("6.90€")}</p>
             </div>
             <div class="mb-3 flex items-center justify-between border-b border-neutral-200 pb-1 pt-1 dark:border-neutral-700">
               <p>Total</p>
               <Price
                 class="text-right text-base text-black dark:text-white"
-                amount={cart.cost.totalAmount.amount}
+                amount={totalAmount.toString()}
                 currencyCode={cart.cost.totalAmount.currencyCode}
               />
             </div>

@@ -3,6 +3,8 @@ import Prose from "../components/prose.astro";
 import { getPage } from "../lib/wix";
 import type { Page } from "../lib/wix/types";
 
+export const prerender = true
+
 let page: Page | undefined;
 
 try {
