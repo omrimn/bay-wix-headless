@@ -12,11 +12,11 @@ const DynamicTag = active ? "p" : "a";
 ['q', 'page'].forEach(param => newParams.delete(param));
 ---
 
-<li class="mt-2 flex text-black dark:text-white">
+<li class="mt-2 flex text-white">
   <DynamicTag
     href={createUrl(Astro.props.item.path, newParams)}
     class={clsx(
-      "w-full text-sm underline-offset-4 hover:underline dark:hover:text-neutral-100",
+      "w-full text-sm underline-offset-4 hover:underline hover:text-neutral-100",
       {
         "underline underline-offset-4": active,
       }

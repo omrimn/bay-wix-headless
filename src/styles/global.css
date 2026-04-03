@@ -12,12 +12,20 @@
     clip-path: inset(0.6px);
   }
 }
-
-@theme {
+/*
   --color-bay-accent: #2a4959;
   --color-bay-accent-light: #8ca3ae;
   --color-bay-accent-dark: #9babb3;
   --color-bay-selection: #e0886d;
+  --c1: #396379;
+  --c2: #2a4959;
+*/
+
+@theme {
+  --color-bay-accent: #945947;
+  --color-bay-accent-light: #e0886d;
+  --color-bay-accent-dark: #b66d57;
+  --color-bay-selection: #2a4959;
   --font-charm: "Charm", sans serif;
   --font-aboreto: "Aboreto", display;
 }
@@ -71,8 +79,8 @@ h2 {
 
 .decor {
   --s: 16px; /* control the size */
-  --c1: #396379;
-  --c2: #2a4959;
+    --c1: var(--color-bay-accent-light);
+    --c2: var(--color-bay-accent);
   @variant dark {
     --c1: var(--color-bay-accent-light);
     --c2: var(--color-bay-accent);

@@ -7,7 +7,7 @@ type Props = { menu: Menu[] };
 
 <button
   aria-label="Open mobile menu"
-  class="flex h-11 w-11 items-center justify-center rounded-md border border-neutral-200 text-black transition-colors md:hidden dark:border-neutral-700 dark:text-white"
+  class="flex h-11 w-11 items-center justify-center rounded-md border transition-colors md:hidden border-neutral-700 text-white"
 >
   <label for="mobile-menu">
     <span class="sr-only">Open mobile menu</span>
@@ -37,11 +37,11 @@ type Props = { menu: Menu[] };
     >
     </label>
     <div
-      class="fixed bottom-0 left-0 right-0 top-0 flex h-full w-full flex-col bg-white pb-6 dark:bg-black -translate-x-full transition-all ease-in-out duration-300 peer-checked:translate-x-0"
+      class="fixed bottom-0 left-0 right-0 top-0 flex h-full w-full flex-col pb-6 bg-neutral-900 -translate-x-full transition-all ease-in-out duration-300 peer-checked:translate-x-0"
     >
       <div class="p-4">
         <button
-          class="mb-4 flex h-11 w-11 items-center justify-center rounded-md border border-neutral-200 text-black transition-colors dark:border-neutral-700 dark:text-white"
+          class="mb-4 flex h-11 w-11 items-center justify-center rounded-md border transition-colors border-neutral-700 text-white"
           aria-label="Close mobile menu"
         >
           <label for="mobile-menu">
@@ -57,12 +57,12 @@ type Props = { menu: Menu[] };
           Astro.props.menu.length ? (
             <ul class="flex w-full flex-col">
               {Astro.props.menu.map((item: Menu) => (
-                <li class="py-2 text-xl text-black transition-colors hover:text-neutral-500 dark:text-white">
+                <li class="py-2 text-xl transition-colors hover:text-neutral-500 text-white">
                   <a
                     href={item.path}
                     class={
                       item.ordre > 1000
-                        ? "text-bay-accent font-sans font-light dark:text-bay-accent-dark"
+                        ? "font-sans font-light text-bay-accent-dark"
                         : ""
                     }
                   >

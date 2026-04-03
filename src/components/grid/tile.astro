@@ -18,11 +18,11 @@ type Props = {
 
 <div
   class={clsx(
-    "group flex h-full w-full items-start justify-center overflow-hidden rounded-lg border bg-slate-50 hover:border-bay-accent dark:bg-black",
+    "group flex h-full w-full items-start justify-center overflow-hidden rounded-lg border hover:border-bay-accent bg-black",
     {
       relative: Astro.props.label,
       "border-2 border-bay-accent": Astro.props.active,
-      "border-neutral-200 dark:border-neutral-800": !Astro.props.active,
+      "border-neutral-800": !Astro.props.active,
     }
   )}
 >

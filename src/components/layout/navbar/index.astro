@@ -11,7 +11,7 @@ const { SITE_NAME } = import.meta.env;
 ---
 
 <div
-  class="sticky top-0 z-50 bg-white font-charm font-bold dark:bg-neutral-900 dark:text-white dark:selection:bg-pink-500 dark:selection:text-white shadow-sm"
+  class="sticky top-0 z-50 font-charm font-bold bg-neutral-900 text-white selection:bg-pink-500 selection:text-white shadow-sm"
 >
   <nav class="relative flex items-center justify-between p-4 lg:px-6">
     <div class="block flex-none md:hidden">
@@ -39,7 +39,7 @@ const { SITE_NAME } = import.meta.env;
                   <li>
                     <a
                       href={item.path}
-                      class="text-neutral-500 underline-offset-4 hover:text-black hover:underline dark:text-neutral-400 dark:hover:text-neutral-300"
+                      class="underline-offset-4 hover:underline text-neutral-400 hover:text-neutral-300"
                     >
                       {item.title}
                     </a>

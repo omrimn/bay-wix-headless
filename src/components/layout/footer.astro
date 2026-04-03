@@ -14,13 +14,13 @@ const menu = await getMenu("next-js-frontend-footer-menu");
 const copyrightName = COMPANY_NAME || SITE_NAME || "";
 ---
 
-<footer class="text-sm text-neutral-500 dark:text-neutral-400">
+<footer class="text-sm text-neutral-400">
   <div
-    class="mx-auto flex w-full max-w-7xl flex-col gap-6 border-t border-neutral-200 px-6 py-12 text-sm md:flex-row md:gap-12 md:px-4 min-[1320px]:px-0 dark:border-neutral-700"
+    class="mx-auto flex w-full max-w-7xl flex-col gap-6 border-t px-6 py-12 text-sm md:flex-row md:gap-12 md:px-4 min-[1320px]:px-0 border-neutral-700"
   >
     <div>
       <a
-        class="flex items-center gap-2 text-black md:pt-1 dark:text-white"
+        class="flex items-center gap-2 md:pt-1 text-white"
         href="/"
         aria-label="Retour à l'accueil"
       >
@@ -30,7 +30,7 @@ const copyrightName = COMPANY_NAME || SITE_NAME || "";
     </div>
     <FooterMenu menu={menu} />
     <div class="md:ml-auto flex w-full flex-col items-center gap-6 md:w-auto">
-      <div class="h-8 p-3 w-max rounded-md bg-bay-accent text-lg text-white dark:bg-bay-accent h-auto w-full rounded-xl font-bold">
+      <div class="h-8 p-3 w-max rounded-md bg-bay-accent text-lg text-white h-auto w-full rounded-xl font-bold">
         <span class="p-3">Contactez nous</span>
         <div class="flex flex-none items-center justify-center">
           <a href="mailto:bijoux.alex.yell@gmail.com">
@@ -41,7 +41,7 @@ const copyrightName = COMPANY_NAME || SITE_NAME || "";
           </a>
         </div>
       </div>
-      <div class="h-8 p-3 w-max rounded-md bg-bay-accent text-lg text-white dark:bg-bay-accent h-auto w-full rounded-xl font-bold">
+      <div class="h-8 p-3 w-max rounded-md bg-bay-accent text-lg text-white h-auto w-full rounded-xl font-bold">
         <span class="p-3">Suivez nous</span>
         <div class="flex flex-none items-center justify-center">
           <a href="https://www.facebook.com/BijouxAlexYell" class="hover:scale-105 transition duration-300 ease-in-out" aria-label="Page Facebook de Bijoux Alex Yell">
@@ -54,7 +54,7 @@ const copyrightName = COMPANY_NAME || SITE_NAME || "";
       </div>
     </div>
   </div>
-  <div class="border-t border-neutral-200 py-6 text-sm dark:border-neutral-700">
+  <div class="border-t py-6 text-sm border-neutral-700">
     <div
       class="mx-auto flex w-full max-w-7xl flex-col items-center gap-1 px-4 md:flex-row md:gap-0 md:px-4 min-[1320px]:px-0"
     >

@@ -9,7 +9,7 @@ type Props = { list: ListItem[]; title?: string };
 <nav>
   {
     Astro.props.title ? (
-      <h3 class="hidden text-xs text-neutral-500 md:block dark:text-neutral-400">
+      <h3 class="hidden text-xs md:block text-neutral-400">
         {Astro.props.title}
       </h3>
     ) : null
