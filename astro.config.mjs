@@ -5,24 +5,22 @@ import wix from "@wix/astro";
 import tailwindcss from "@tailwindcss/vite";
 
 import react from "@astrojs/react";
-import cloudflare from "@astrojs/cloudflare";
+import cloudProviderFetchAdapter from "@wix/cloud-provider-fetch-adapter";
+const isBuild = process.env.NODE_ENV == "production";
+
 
 // https://astro.build/config
 export default defineConfig({
   output: "server",
   integrations: [wix(), react()],
-
+  
   image: {
     domains: ["static.wixstatic.com", "www.wixstatic.com"],
   },
-
+  
   vite: {
     plugins: [tailwindcss()],
   },
-
-  adapter: cloudflare({
-    platformProxy: {
-      enabled: false,
-    },
-  }),
+  
+  ...(isBuild && { adapter: cloudProviderFetchAdapter({}) })
 });
