@@ -27,7 +27,7 @@
     "typescript": "^5.8.3"
   },
   "devDependencies": {
-    "@astrojs/cloudflare": "^12.5.3",
+    "@wix/cloud-provider-fetch-adapter": "^1.0.0",
     "@astrojs/react": "^4.3.0",
     "@types/react": "^18.3.1",
     "@types/react-dom": "^18.3.1",
