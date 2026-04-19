@@ -13,7 +13,11 @@ const isBuild = process.env.NODE_ENV == "production";
 export default defineConfig({
   output: "server",
   integrations: [wix(), react()],
-  
+
+  security: {
+    checkOrigin: false
+  },
+
   image: {
     domains: ["static.wixstatic.com", "www.wixstatic.com"],
   },
